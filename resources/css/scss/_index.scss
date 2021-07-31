@@ -1,7 +1,9 @@
 body
 {
-    background-color: #fdf2ff;
     background-image: linear-gradient(0deg, #fdf2ff 0%, #eef8ff 100%);
+    height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     
     .header
     {
@@ -74,6 +76,12 @@ body
                         width: 50%;
                         height: auto;
                         margin-right: 15px;
+                        transition: 200ms ease-in-out;
+
+                        &:hover
+                        {
+                            color: $pink;
+                        }
                     }
                 }
 
@@ -100,12 +108,22 @@ body
                         transition: 200ms ease-in-out;
                         border-bottom: 2px solid transparent;
                         padding-bottom: 5px;
+                        position: relative;
 
                         svg
                         {
                             width: 115%;
                             height: auto;
+                            cursor: pointer;
+                            pointer-events: all;
+                        }
 
+                        &-counter
+                        {
+                            position: absolute;
+                            right: -6px;
+                            top: -15px;
+                            font-size: 13px;
                         }
 
                         &:hover
@@ -157,6 +175,7 @@ body
                 box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
                 transition: 200ms ease-in-out;
                 width: 250px;
+                z-index: 0;
 
                 &-title
                 {
@@ -189,6 +208,7 @@ body
                 {
                     margin-top: 20px;
                     display: none;
+                    
 
                     &-link
                     {
@@ -200,6 +220,7 @@ body
                         border-radius: 10px;
                         font-weight: 600;
                         transition: 0.5s;
+                        cursor: pointer;
 
                         &:hover
                         {
@@ -208,7 +229,7 @@ body
                         }
                     }
 
-                    svg
+                    .bi-cart3
                     {
                         left: 205px;
                         bottom: 30px;
@@ -216,11 +237,115 @@ body
                         color: $blue;
                         transition: 200ms ease-in-out;
                         cursor: pointer;
+    
 
                         &:hover{
 
                             color: $pink;
 
+                        }
+                    }
+
+                    &-quantity
+                    {
+                        background-color: $white;
+                        padding: 15px 0;
+                        position: absolute;
+                        left: 240px;
+                        top: 340px;
+                        display: flex;
+                        flex-direction: column;
+                        align-content: center;
+                        justify-content: center;
+                        align-items: center;
+                        box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+                        border-radius: 5px;
+                        user-select: none;
+
+
+                        &-title
+                        {
+                            margin-bottom: 10px;
+                        }
+
+                        &-apply
+                        {
+                            border-radius: 10px;
+                            margin-top: 10px;
+                            cursor: pointer;
+                            padding: 7px 15px;
+                            color: $blue;
+                            background-color: $white;
+                            transition: 200ms ease-in-out;
+                            font-size: 1rem;
+                            border: 1px solid $blue;
+
+                            &:hover
+                            {
+                                border: 1px solid $another-pink;
+                                color: $another-pink;
+                            }
+                        }
+
+                        &-selector
+                        {
+                            display: flex;
+                            flex-direction: row;
+                            align-content: center;
+                            justify-content: center;
+                            align-items: center;
+
+                            svg
+                            {   
+                                color: $blue;
+                                margin-left: 15px;
+                                margin-right: 15px;
+                                border-radius: 50%;
+                                cursor: pointer;
+                                pointer-events: all;
+                                transition: 200ms ease-in-out;
+
+                                &:hover
+                                {
+                                    color: $pink;
+                                }
+                            }
+
+                            input
+                            {
+                                width: 50px;
+                                text-align: center;
+                                outline: none;
+                                -webkit-appearance: none;
+                            }
+                            input::-webkit-outer-spin-button,
+                            input::-webkit-inner-spin-button 
+                            {
+                            appearance: none;
+                            margin: 0;
+                            }
+                        }
+
+                        &-error
+                        {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            align-content: center;
+                            flex-direction: row;
+                            padding-top: 15px;
+                            display: none;
+
+                            &-icon
+                            {
+                                color: $red;
+                            }
+
+                            &-text
+                            {
+                                color: $red;
+                                font-size: 0.9rem;
+                            }
                         }
                     }
                 }
@@ -241,6 +366,103 @@ body
                         display: block;
                     }
                 }
+            }
+        }
+    }
+
+    .producto__añadido
+    {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: flex-end;
+        align-items: center;
+        display: none;
+
+        &-card
+        {
+            position: fixed;
+            background-image: linear-gradient(to right, $blue 0%, $pink  51%, $blue  100%);
+            background-size: 200% auto;
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            width: auto;
+            height: 70px;
+            z-index: 100;
+            top: 800px;
+            right: 65px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+
+            svg
+            {
+                margin-right: 10px;
+                color: $white;
+            }
+
+            &-text
+            {
+                color: $white;
+            }
+        }
+    }
+   
+
+    .popup__descripcion
+    {
+        background-color: $white;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+
+        &-head
+        {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            align-content: center;
+            flex-direction: row;
+
+            &-title
+            {
+                font-size: 1.3rem;
+            }
+        }
+
+        &-card
+        {
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 30px;
+
+            &-title
+            {
+                margin-right: 50px;
+            }
+            &-img
+            {
+                margin-right: 50px;
+                width: auto;
+                max-height: 160px;
+            }
+            &-price
+            {
+                margin-right: 50px;
+            }
+            &-cantidad
+            {
+                width: 40px;
+                border: 2px solid $blue;
+                border-radius: 5px;
             }
         }
     }
