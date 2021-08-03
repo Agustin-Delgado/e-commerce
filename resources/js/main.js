@@ -1,6 +1,8 @@
-var carrito = []
+const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let itemSeleccionado
 let cantidadSeleccionada
+$("#cartCounter").html(JSON.parse(localStorage.getItem('cartCounter')))
+
 
 class producto {
     constructor(identificador, nombre, precio, categoria, descripcion, destacado, stock, cantidad) {
@@ -48,10 +50,10 @@ $(document).ready(function () {
 
     })
 
-    $(document).on("click",".bi-cart3", function (event) {
+    $(document).on("click", ".bi-cart3", function (event) {
 
         let itemId = event.target.id
-        
+
         itemSeleccionado = productos.find(p => p.identificador === itemId)
 
         $(".productos__row-card-buy-quantity").empty()
@@ -60,11 +62,11 @@ $(document).ready(function () {
 
     })
 
-    function seleccionarCantidad(itemSeleccionado){
+    function seleccionarCantidad(itemSeleccionado) {
 
-        let quantityCounter =   
+        let quantityCounter =
 
-        `<h3 class="productos__row-card-buy-quantity-title">Cantidad</h3>
+            `<h3 class="productos__row-card-buy-quantity-title">Cantidad</h3>
     
         <div class="productos__row-card-buy-quantity-selector">
     
@@ -96,45 +98,46 @@ $(document).ready(function () {
 
         </div>
     `
-    $(document.getElementById(itemSeleccionado.nombre)).append(quantityCounter)
-    console.log(document.getElementById(itemSeleccionado.nombre))
-    verificarCantidad()
+        $(document.getElementById(itemSeleccionado.nombre)).append(quantityCounter)
+        console.log(document.getElementById(itemSeleccionado.nombre))
+        verificarCantidad()
 
     }
 
-    function verificarCantidad(){
+    function verificarCantidad() {
 
-        let value = 1 
+        let value = 1
         $("#cantidad").val(1)
 
-        $("#sumar").click(function(){
+        $("#sumar").click(function () {
             ++value
             $("#cantidad").val(value)
         })
 
-        $("#restar").click(function(){
+        $("#restar").click(function () {
 
-            if($("#cantidad").val() > 1){
+            if ($("#cantidad").val() > 1) {
                 --value
                 $("#cantidad").val(value)
-            }else{$("#cantidad").val(1)}
+            } else { $("#cantidad").val(1) }
         })
 
-        $("#aplicar").click(function(){
-        revisarStock(value)
-    })}
+        $("#aplicar").click(function () {
+            revisarStock(value)
+        })
+    }
 
-    function revisarStock(value){
+    function revisarStock(value) {
 
         cantidadSeleccionada = value
         itemSeleccionado.stock = itemSeleccionado.stock - cantidadSeleccionada
-            
-        if(itemSeleccionado.stock < 0){
+
+        if (itemSeleccionado.stock < 0) {
 
             $(".productos__row-card-buy-quantity-error").fadeIn().delay(1500)
             itemSeleccionado.stock = itemSeleccionado.stock + cantidadSeleccionada
 
-        }else{
+        } else {
 
             console.log(itemSeleccionado.stock)
             agregarItem()
@@ -144,22 +147,22 @@ $(document).ready(function () {
 
     function agregarItem() {
 
-        let itemAñadido
-
-        let counter = Number($("#cartCounter").html())
-
-        $("#cartCounter").html(counter + cantidadSeleccionada) 
-
-        itemAñadido = carrito.push(new producto(itemSeleccionado.identificador, itemSeleccionado.nombre, itemSeleccionado.precio, itemSeleccionado.categoria, itemSeleccionado.descripcion, itemSeleccionado.destacado, itemSeleccionado.stock, cantidadSeleccionada))
-
+        carrito.push(new producto(itemSeleccionado.identificador, itemSeleccionado.nombre, itemSeleccionado.precio, itemSeleccionado.categoria, itemSeleccionado.descripcion, itemSeleccionado.destacado, itemSeleccionado.stock, cantidadSeleccionada))
+        localStorage.setItem('cartCounter', carrito.length)
+        saveStorage()
         toastItemAgregado()
     }
 
-    function toastItemAgregado(){
+    function toastItemAgregado() {
 
         $("#productoAñadido").fadeIn().delay(1500).fadeOut()
         $(".productos__row-card-buy-quantity").empty()
 
     }
-})
 
+    function saveStorage(){
+
+        localStorage.setItem('carrito', JSON.stringify(carrito))
+        location.reload();
+    }
+})
