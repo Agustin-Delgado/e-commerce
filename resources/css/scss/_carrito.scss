@@ -28,8 +28,7 @@
             justify-content: space-around;
             align-items: center;
             padding: 20px 0;
-            border-top: 1px solid;
-            border-bottom: 1px solid;
+            border-bottom: 2px solid;
             border-image: linear-gradient(to right, $blue , $pink);
             border-image-slice: 1;
 
@@ -37,6 +36,7 @@
             {
                 font-size: 1.3rem;
             }
+
             &-quantity
             {
                 font-size: 1.3rem;
@@ -49,6 +49,11 @@
             {
                 font-size: 1.5rem;
             }
+            &-x
+            {
+                color: $another-pink;
+                cursor: pointer;
+            }
         }
 
         &-buy
@@ -58,7 +63,7 @@
             align-items: flex-end;
             justify-content: space-between;
             padding: 30px;
-            border-bottom: 1px solid;
+            border-bottom: 2px solid;
             border-image: linear-gradient(to right, $blue , $pink);
             border-image-slice: 1;
 

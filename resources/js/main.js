@@ -2,10 +2,11 @@ const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let itemSeleccionado
 let cantidadSeleccionada
 $("#cartCounter").html(JSON.parse(localStorage.getItem('cartCounter')))
+localStorage.setItem('carrito', JSON.stringify(carrito))
 
 
 class producto {
-    constructor(identificador, nombre, precio, categoria, descripcion, destacado, stock, cantidad) {
+    constructor(identificador, nombre, precio, categoria, descripcion, destacado, stock, cantidad, img) {
         this.identificador = identificador;
         this.nombre = nombre;
         this.precio = precio;
@@ -14,6 +15,7 @@ class producto {
         this.destacado = destacado;
         this.stock = stock;
         this.cantidad = cantidad;
+        this.img = img;
     }
 }
 
@@ -147,7 +149,7 @@ $(document).ready(function () {
 
     function agregarItem() {
 
-        carrito.push(new producto(itemSeleccionado.identificador, itemSeleccionado.nombre, itemSeleccionado.precio, itemSeleccionado.categoria, itemSeleccionado.descripcion, itemSeleccionado.destacado, itemSeleccionado.stock, cantidadSeleccionada))
+        carrito.push(new producto(itemSeleccionado.identificador, itemSeleccionado.nombre, itemSeleccionado.precio, itemSeleccionado.categoria, itemSeleccionado.descripcion, itemSeleccionado.destacado, itemSeleccionado.stock, cantidadSeleccionada, itemSeleccionado.img))
         localStorage.setItem('cartCounter', carrito.length)
         saveStorage()
         toastItemAgregado()
@@ -163,6 +165,6 @@ $(document).ready(function () {
     function saveStorage(){
 
         localStorage.setItem('carrito', JSON.stringify(carrito))
-        location.reload();
+        location.reload()
     }
 })
