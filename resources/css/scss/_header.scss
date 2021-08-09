@@ -88,6 +88,9 @@
         {
             display: flex;
             flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            align-content: center;
 
             &-link
             {
@@ -101,12 +104,6 @@
                     padding-bottom: 5px;
                     position: relative;
                     cursor: pointer;
-
-                    svg
-                    {
-                        cursor: pointer;
-                        pointer-events: all;
-                    }
 
                     &-counter
                     {

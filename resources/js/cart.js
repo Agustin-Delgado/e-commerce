@@ -1,3 +1,5 @@
+  let total
+
 $(document).ready(function () {
 
   $("#cartCounter").html(JSON.parse(localStorage.getItem('cartCounter')))
@@ -40,40 +42,74 @@ $(document).ready(function () {
               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
               <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
             </svg>
+            <div class="carrito__contain-table-loader"></div>
 
         </div>`)
 
         $(".carrito__contain").append(addToCart)
 
+        
+
     })
 
-    let total = storage.reduce((sum, value) => ( sum + (value.precio*value.cantidad) ), 0);
-    console.log(total);
-
-    $("#total").text("Total: $" + total)
+    calcularTotal()
 
     $(".carrito__contain-table").on("click", ".carrito__contain-table-x", function (event) {
-
+      
       let itemId = event.target.id
       itemSeleccionado = storage.find(p => p.identificador === itemId)
 
-      const index = storage.findIndex(carrito => carrito === itemSeleccionado);
-      storage.splice(index, 1);
-      localStorage.setItem('carrito', JSON.stringify(storage));
-      $(document.getElementById(itemSeleccionado.nombre)).remove()
+      Swal.fire({
+        title: 'Un minuto!',
+        text: "Se eliminara " + itemSeleccionado.nombre + " del carrito",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#4aabff',
+        cancelButtonColor: '#dc3545',
+        confirmButtonText: 'Si, eliminar!',
+        cancelButtonText: 'Cancelar'
 
-      let cartCounter = $("#cartCounter").text()-1
+      }).then((result) => {
 
-      if ($("#cartCounter").text()-1 === 0){
+        if (result.isConfirmed) {
+          const index = storage.findIndex(carrito => carrito === itemSeleccionado);
+          storage.splice(index, 1);
+          localStorage.setItem('carrito', JSON.stringify(storage));
+          $(document.getElementById(itemSeleccionado.nombre)).remove()
+          console.log(itemSeleccionado)
+    
+          let cartCounter = $("#cartCounter").text()-1
+    
+          if ($("#cartCounter").text()-1 === 0){
+    
+            localStorage.clear()
+            location.reload()
+    
+          }else{
+    
+            localStorage.setItem('cartCounter', cartCounter)
+            $("#cartCounter").html(JSON.parse(localStorage.getItem('cartCounter')))
+    
+          }
+          Swal.fire(
+            'Eliminado!',
+            'El producto fue eliminado del carrito',
+            'success'
+          )
+          calcularTotal()
+        }
+      })
 
-        localStorage.clear()
-        location.reload()
-
-      }else{
-        localStorage.setItem('cartCounter', cartCounter)
-        location.reload()
-      }
 
   })
+
+    function calcularTotal(){
+
+      total = storage.reduce((sum, value) => ( sum + (value.precio*value.cantidad) ), 0);
+      console.log(total);
+
+      $("#total").text("Total: $" + total)
+    }
+
   }
 })
