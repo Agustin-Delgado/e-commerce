@@ -98,12 +98,10 @@
                         color: $blue;
                         transition: 200ms ease-in-out;
                         cursor: pointer;
-    
 
-                        &:hover{
-
+                        &:hover
+                        {
                             color: $pink;
-
                         }
                     }
 
@@ -163,7 +161,6 @@
                                 margin-right: 15px;
                                 border-radius: 50%;
                                 cursor: pointer;
-                                pointer-events: all;
                                 transition: 200ms ease-in-out;
 
                                 &:hover

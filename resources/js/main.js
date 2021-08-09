@@ -35,12 +35,11 @@ $(document).ready(function () {
             <div class="productos__row-card-buy">
 
                 <a id="buyButton" class="productos__row-card-buy-link">Comprar</a>
-                <svg id="${productos[i].identificador}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                    class="bi bi-cart3" viewBox="0 0 16 16" pointer-events="all">
-                    <path
-                        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                </svg>
 
+                <svg id="${productos[i].identificador}" class="bi bi-cart3" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path
+                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                </svg>
                 <div id="${productos[i].nombre}" class="productos__row-card-buy-quantity"></div>
 
             </div>
@@ -48,8 +47,8 @@ $(document).ready(function () {
 
         </div>`)
 
-        $('.productos__row').append(listaDeProductos);
-
+        $('.productos__row').append(listaDeProductos)
+        
     })
 
     $(document).on("click", ".bi-cart3", function (event) {
@@ -103,7 +102,6 @@ $(document).ready(function () {
         $(document.getElementById(itemSeleccionado.nombre)).append(quantityCounter)
         console.log(document.getElementById(itemSeleccionado.nombre))
         verificarCantidad()
-
     }
 
     function verificarCantidad() {
@@ -151,7 +149,6 @@ $(document).ready(function () {
 
         carrito.push(new producto(itemSeleccionado.identificador, itemSeleccionado.nombre, itemSeleccionado.precio, itemSeleccionado.categoria, itemSeleccionado.descripcion, itemSeleccionado.destacado, itemSeleccionado.stock, cantidadSeleccionada, itemSeleccionado.img))
         localStorage.setItem('cartCounter', carrito.length)
-        saveStorage()
         toastItemAgregado()
     }
 
@@ -159,12 +156,12 @@ $(document).ready(function () {
 
         $("#productoAñadido").fadeIn().delay(1500).fadeOut()
         $(".productos__row-card-buy-quantity").empty()
-
+        saveStorage()
     }
 
     function saveStorage(){
 
         localStorage.setItem('carrito', JSON.stringify(carrito))
-        location.reload()
+        $("#cartCounter").html(JSON.parse(localStorage.getItem('cartCounter')))
     }
 })
