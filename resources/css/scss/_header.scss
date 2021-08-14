@@ -2,6 +2,10 @@
 {
     height: 80px;
     background: linear-gradient(90deg, rgba(21,162,203,1) 15%, rgba(224,42,255,1) 100%);
+    position: fixed;
+    top: 0%;
+    width: 100%;
+    z-index: 2;
 
     &__nav
     {
