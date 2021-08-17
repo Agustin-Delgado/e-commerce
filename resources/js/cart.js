@@ -17,28 +17,28 @@ $(document).ready(function () {
               <div class="checkout__contain-payment-form-contain">
 
                   <input class="checkout__contain-payment-form-contain-input" type="text" placeholder="Nombre"
-                      name="" id="">
+                      name="">
 
               </div>
 
               <div class="checkout__contain-payment-form-contain">
 
                   <input class="checkout__contain-payment-form-contain-input" type="text" placeholder="Apellido"
-                      name="" id="">
+                      name="">
 
               </div>
 
               <div class="checkout__contain-payment-form-contain">
 
                   <input class="checkout__contain-payment-form-contain-input" type="tel" placeholder="Telefono"
-                      name="" id="">
+                      name="">
 
               </div>
 
               <div class="checkout__contain-payment-form-contain">
 
                   <input class="checkout__contain-payment-form-contain-input" type="email"
-                      placeholder="Correo electrónico" name="" id="">
+                      placeholder="Correo electrónico" name="">
 
               </div>
 
@@ -46,7 +46,7 @@ $(document).ready(function () {
               <div class="checkout__contain-payment-form-contain">
 
                   <input class="checkout__contain-payment-form-contain-input" type="tel" placeholder="DNI" name=""
-                      id="">
+                    >
 
               </div>
 
@@ -57,28 +57,27 @@ $(document).ready(function () {
               <div class="checkout__contain-payment-form-two-contain">
 
                   <input class="checkout__contain-payment-form-two-contain-input" type="text"
-                      placeholder="Numero de tarjeta" name="" id="">
+                      placeholder="Numero de tarjeta" name="">
 
               </div>
 
               <div class="checkout__contain-payment-form-two-contain">
 
                   <input class="checkout__contain-payment-form-two-contain-input" type="text"
-                      placeholder="Nombre y apellido" name="" id="">
+                      placeholder="Nombre y apellido" name="">
 
               </div>
 
               <div class="checkout__contain-payment-form-two-contain">
 
-                  <input class="checkout__contain-payment-form-two-contain-input" type="date"
-                      placeholder="Fecha de expiracion" name="" id="">
+              <input placeholder="Fecha de vencimiento" class="checkout__contain-payment-form-two-contain-input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"/>
 
               </div>
 
               <div class="checkout__contain-payment-form-two-contain">
 
                   <input class="checkout__contain-payment-form-two-contain-input" type="text"
-                      placeholder="Codigo de seguridad" name="" id="">
+                      placeholder="Codigo de seguridad" name="">
 
               </div>
 
@@ -86,7 +85,7 @@ $(document).ready(function () {
               <div class="checkout__contain-payment-form-two-contain">
 
                   <input class="checkout__contain-payment-form-two-contain-input" type="tel"
-                      placeholder="DNI del titular de la tarjeta" name="" id="">
+                      placeholder="DNI del titular de la tarjeta" name="">
 
               </div>
 
@@ -108,10 +107,18 @@ $(document).ready(function () {
       <div class="checkout__contain-details">
 
           <h2 class="checkout__contain-details-title">Detalle de la compra</h2>
-
+          
           <div class="checkout__contain-details-total">
 
-              <h3 class="checkout__contain-details-total-title">Total:</h3>
+            <span class="checkout__contain-details-total-currency">Moneda
+            
+            <div class="button r" id="button-3">
+            <input type="checkbox" class="checkbox">
+            <div class="knobs"></div>
+            <div class="layer"></div>
+          </div>
+            
+            </span>
 
           </div>
 
@@ -122,7 +129,7 @@ $(document).ready(function () {
 
   $("#cartCounter").html(JSON.parse(localStorage.getItem('cartCounter')))
 
-  if($("#cartCounter").is(':empty')){
+  if ($("#cartCounter").is(':empty')) {
 
     let emptyCart = $(`
                 
@@ -141,14 +148,14 @@ $(document).ready(function () {
     $(".carrito__contain-table-title").css("margin-bottom", "30px")
 
 
-  }else{
+  } else {
 
     let storage = JSON.parse(localStorage.getItem('carrito'))
     console.log(storage)
 
     $.each(storage, function (i) {
 
-        let addToCart = $(`
+      let addToCart = $(`
                 
         <div id="${storage[i].nombre}" class="carrito__contain-table">
 
@@ -164,16 +171,16 @@ $(document).ready(function () {
 
         </div>`)
 
-        $(".carrito__contain").append(addToCart)
+      $(".carrito__contain").append(addToCart)
 
-        
+
 
     })
 
     calcularTotal()
 
     $(".carrito__contain-table").on("click", ".carrito__contain-table-x", function (event) {
-      
+
       let itemId = event.target.id
       itemSeleccionado = storage.find(p => p.identificador === itemId)
 
@@ -195,19 +202,19 @@ $(document).ready(function () {
           localStorage.setItem('carrito', JSON.stringify(storage));
           $(document.getElementById(itemSeleccionado.nombre)).remove()
           console.log(itemSeleccionado)
-    
-          let cartCounter = $("#cartCounter").text()-1
-    
-          if ($("#cartCounter").text()-1 === 0){
-    
+
+          let cartCounter = $("#cartCounter").text() - 1
+
+          if ($("#cartCounter").text() - 1 === 0) {
+
             localStorage.clear()
             location.reload()
-    
-          }else{
-    
+
+          } else {
+
             localStorage.setItem('cartCounter', cartCounter)
             $("#cartCounter").html(JSON.parse(localStorage.getItem('cartCounter')))
-    
+
           }
           Swal.fire({
             title: 'Eliminado!',
@@ -220,13 +227,11 @@ $(document).ready(function () {
           calcularTotal()
         }
       })
+    })
 
+    function calcularTotal() {
 
-  })
-
-    function calcularTotal(){
-
-      total = storage.reduce((sum, value) => ( sum + (value.precio*value.cantidad) ), 0);
+      total = storage.reduce((sum, value) => (sum + (value.precio * value.cantidad)), 0);
       console.log(total);
 
       $("#total").text("Total: $" + total)
@@ -234,7 +239,7 @@ $(document).ready(function () {
 
     /* FINALIZAR COMPRA */
 
-    $(".carrito__contain-buy-button").click(function(){
+    $(".carrito__contain-buy-button").click(function () {
 
       $(".carrito").html("")
       $(".carrito").append(checkout)
@@ -242,7 +247,7 @@ $(document).ready(function () {
 
       $.each(storage, function (i) {
 
-          let checkoutItems = $(`
+        let checkoutItems = $(`
           
           <div class="checkout__contain-details-content">
               <img class="checkout__contain-details-content-img" src="${storage[i].img}"
@@ -253,52 +258,78 @@ $(document).ready(function () {
           </div >
           `)
 
-          $(checkoutItems).insertAfter(".checkout__contain-details-title")
+        $(checkoutItems).insertAfter(".checkout__contain-details-title")
 
       })
 
-      total = storage.reduce((sum, value) => ( sum + (value.precio*value.cantidad) ), 0);
+      total = storage.reduce((sum, value) => (sum + (value.precio * value.cantidad)), 0);
 
-      let checkoutTotal = $(`<span class="checkout__contain-details-total-price">$${total}</span>`)
+      let checkoutTotal = $(`<h3 class="checkout__contain-details-total-title">Total: $${total}</h3>
+      `)
 
-      $(checkoutTotal).insertAfter(".checkout__contain-details-total-title")
+      $(checkoutTotal).insertAfter(".checkout__contain-details-total-currency")
 
       let pagination
 
-      $("#nextButton").click(function(){
+      $("#nextButton").click(function () {
 
-          pagination = 1
+        pagination = 1
 
-          $(".checkout__contain-payment-form").slideUp(300).fadeOut(400)
-          $(".checkout__contain-payment-form-two").slideDown(300).fadeIn(400)
+        $(".checkout__contain-payment-form").slideUp(300).fadeOut(400)
+        $(".checkout__contain-payment-form-two").slideDown(300).fadeIn(400)
 
-          pagNum(pagination)
+        pagNum(pagination)
 
       })
 
-      $("#backButton").click(function(){
+      $("#backButton").click(function () {
 
-          pagination = 0
+        pagination = 0
 
-          $(".checkout__contain-payment-form-two").slideUp(300).fadeOut(400)
-          $(".checkout__contain-payment-form").slideDown(300).fadeIn(400)
+        $(".checkout__contain-payment-form-two").slideUp(300).fadeOut(400)
+        $(".checkout__contain-payment-form").slideDown(300).fadeIn(400)
 
-          pagNum(pagination)
-    })
+        pagNum(pagination)
+      })
 
-    function pagNum(pagination){
+      function pagNum(pagination) {
 
-          if(pagination == 1){
-              
-              $(".checkout__contain-payment-button-next").text("Terminar compra")
-              $(".checkout__contain-payment-title").text("Ingresá los datos de la tarjeta")
-              $(".checkout__contain-payment-button-next").css("background-position","right center")
-          }else{
-              $(".checkout__contain-payment-button-next").text("Siguiente")
-              $(".checkout__contain-payment-title").text("Ingresá tus datos")
-              $(".checkout__contain-payment-button-next").css("background-position","left center")
-          }
+        if (pagination == 1) {
+
+          $(".checkout__contain-payment-button-next").text("Terminar compra")
+          $(".checkout__contain-payment-title").text("Ingresá los datos de la tarjeta")
+          $(".checkout__contain-payment-button-next").css("background-position", "right center")
+        } else {
+          $(".checkout__contain-payment-button-next").text("Siguiente")
+          $(".checkout__contain-payment-title").text("Ingresá tus datos")
+          $(".checkout__contain-payment-button-next").css("background-position", "left center")
+        }
       }
+
+      let moneda = "Dolar Oficial"
+      monedaSeleccionada = dolar.find(p => p.casa.nombre === moneda)
+      let dolarHoy = monedaSeleccionada.casa.venta
+
+      $("#button-3").click(function () {
+
+        if ($('.checkbox').prop('checked')) {
+
+          total = total / parseInt(dolarHoy)
+
+          $(".checkout__contain-details-total-title").html("")
+          checkoutTotal = $(`<h3 class="checkout__contain-details-total-title">Total: $${parseInt(total)}</h3>`)
+          $(checkoutTotal).insertAfter(".checkout__contain-details-total-currency")
+
+        } else {
+
+          total = total * parseInt(dolarHoy)
+          $(".checkout__contain-details-total-title").html("")
+          checkoutTotal = $(`<h3 class="checkout__contain-details-total-title">Total: $${parseInt(total)}</h3>`)
+          $(checkoutTotal).insertAfter(".checkout__contain-details-total-currency")
+        }
+
+      })
+
     })
   }
 })
