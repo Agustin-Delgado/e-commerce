@@ -1,41 +1,16 @@
 $(document).ready(function () {
 
-    let total
-
-    let storage = JSON.parse(localStorage.getItem('carrito'))
-    console.log(storage)
-
-    $.each(storage, function (i) {
-
-        let checkoutItems = $(`
-        
-        <div class="checkout__contain-details-content">
-            <img class="checkout__contain-details-content-img" src="${storage[i].img}"
-            alt="">
-            <h3 class="checkout__contain-details-content-title">${storage[i].nombre}</h3>
-            <span class="checkout__contain-details-content-quantity">Cantidad: ${storage[i].cantidad}</span>
-            <span class="checkout__contain-details-content-subtotal">Subtotal: $${storage[i].precio * storage[i].cantidad}</span>
-        </div >
-        `)
-
-        $(checkoutItems).insertAfter(".checkout__contain-details-title")
-
-    })
-
-    total = storage.reduce((sum, value) => ( sum + (value.precio*value.cantidad) ), 0);
-
-    let checkoutTotal = $(`<span class="checkout__contain-details-total-price">$${total}</span>`)
-
-    $(checkoutTotal).insertAfter(".checkout__contain-details-total-title")
-
-    let pagination
+    $(".checkout__contain-content-dni").hide()
+    $(".checkout__contain-content-form-two").hide()
 
     $("#nextButton").click(function(){
 
         pagination = 1
 
-        $(".checkout__contain-payment-form").slideUp(300).fadeOut(400)
-        $(".checkout__contain-payment-form-two").slideDown(300).fadeIn(400)
+        $(".checkout__contain-content-card").slideUp(300).fadeOut(400)
+        $(".checkout__contain-content-dni").slideDown(300).fadeIn(400)
+
+        $(".checkout__contain-content-form-two").slideDown(300).fadeIn(400)
 
         pagNum(pagination)
 
@@ -45,8 +20,10 @@ $(document).ready(function () {
 
         pagination = 0
 
-        $(".checkout__contain-payment-form-two").slideUp(300).fadeOut(400)
-        $(".checkout__contain-payment-form").slideDown(300).fadeIn(400)
+        $(".checkout__contain-content-dni").slideUp(300).fadeOut(400)
+        $(".checkout__contain-content-card").slideDown(300).fadeIn(400)
+
+        $(".checkout__contain-content-form-two").slideUp(300).fadeOut(400)
 
         pagNum(pagination)
    })
@@ -55,15 +32,90 @@ $(document).ready(function () {
 
         if(pagination == 1){
             
-            $(".checkout__contain-payment-button-next").text("Terminar compra")
-            $(".checkout__contain-payment-title").text("Ingresá los datos de la tarjeta")
-            $(".checkout__contain-payment-button-next").css("background-position","right center")
+            $(".checkout__contain-content-button-next").text("Terminar compra")
+            $(".checkout__contain-content-button-next").css("background-position","right center")
         }else{
-            $(".checkout__contain-payment-button-next").text("Siguiente")
-            $(".checkout__contain-payment-title").text("Ingresá tus datos")
-            $(".checkout__contain-payment-button-next").css("background-position","left center")
+            $(".checkout__contain-content-button-next").text("Siguiente")
+            $(".checkout__contain-content-button-next").css("background-position","left center")
         }
     }
 
+      $('body').on('input', ".input-cart-number", function() {
 
+        let cardNumber = ''
+
+            $('.input-cart-number').each(function(){
+
+            cardNumber += $(this).val() + ' '
+
+                if ($(this).val().length === 4) {
+                
+                    $(this).next().focus()
+
+                    $(".checkout__contain-content-card-flip-front-number").html(cardNumber)
+
+            }else{
+
+                $(".checkout__contain-content-card-flip-front-number").html(cardNumber)
+            }
+        })
+    })
+
+    $('body').on('input', ".input-dni-number", function() {
+
+        let dniNumber = ''
+
+            $('.input-dni-number').each(function(){
+
+            dniNumber += $(this).val()
+
+                if ($(this).val().length == 2){
+                
+                    dniNumber = dniNumber + "."
+                    $(".checkout__contain-content-dni-flip-front-expiration div").html(dniNumber)
+                    $('.input-dni-number').val($(".checkout__contain-content-dni-flip-front-expiration div").html())
+
+            }else if ($(this).val().length == 6){
+
+                dniNumber = dniNumber + "."
+                $(".checkout__contain-content-dni-flip-front-expiration div").html(dniNumber)
+                $('.input-dni-number').val($(".checkout__contain-content-dni-flip-front-expiration div").html())
+
+            }else{
+                $(".checkout__contain-content-dni-flip-front-expiration div").html(dniNumber)
+            }
+        })
+    })
+    
+    $('body').on('input', "#card-holder", function() {
+
+        if ($(this).val().length >= 34) {
+
+            $('.checkout__contain-content-card .checkout__contain-content-card-flip-front-holder div').html()
+
+        }else{
+
+            $('.checkout__contain-content-card .checkout__contain-content-card-flip-front-holder div').html($(this).val())
+            $('.checkout__contain-content-dni-flip-front-holder div').html($(this).val())
+        }
+    })
+
+    $('body').on('change', "#card-expiration-month, #card-expiration-year", function() {
+
+        m = $('#card-expiration-month option').index($('#card-expiration-month option:selected'))
+        m = (m < 10) ? '0' + m : m
+        y = $('#card-expiration-year').val()
+
+        $('.checkout__contain-content-card-flip-front-expiration div').html(m + '/' + y)
+
+    })
+
+    $('#card-ccv').on('focus', function(){
+
+        $('.checkout__contain-content-card').addClass('hover')}).on('blur', function(){
+
+            $('.checkout__contain-content-card').removeClass('hover')}).on('keyup change', function(){
+
+                $('.checkout__contain-content-card-flip-back-ccv div').html($(this).val())
+      })
 })
