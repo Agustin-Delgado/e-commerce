@@ -1,360 +1,397 @@
 
-.productos
-    {
-        padding: 0 6%;
-        margin-top: 6%;
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        justify-content: center;
-
-        &__title
+    .productos
         {
-            font-size: 2.5rem;
-            margin-bottom: 5%;
-        }
-
-        &__row
-        {
+            padding: 0 6%;
+            margin-top: 6%;
             display: flex;
-            flex-direction: row;
-            align-items: baseline;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
+            flex-direction: column;
             align-content: center;
+            justify-content: center;
 
-            &-card
+            &__filter
             {
-                position: relative;
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: baseline;
                 align-content: center;
-                justify-content: center;
-                align-items: center;
-                padding: 30px 10px;
-                background-color: $white;
-                border-radius: 5px;
-                box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
-                transition: 200ms ease-in-out;
-                width: 250px;
-                z-index: 0;
 
                 &-title
                 {
-                    font-size: 1rem;
-                }
+                    font-size: 2.5rem;
+                    margin-bottom: 5%;
 
-                &-img
-                {
-                    padding: 5px 5px;
-                    max-width: 230px;
-                    max-height: 230px;
-                }
-
-                &-price
-                {
-                    font-size: 1.5rem;
-                    font-weight: 500;
-                }
-
-                &-description
-                {
-                    display: none;
-                    text-align: center;
-                    margin-top: 10px;
-                    color: rgba(0, 0, 0, 0.6);
-                    font-size: 1rem;
-                }
-
-                &-buy
-                {
-                    margin-top: 20px;
-                    display: none;
-                    
-
-                    &-link
+                    &-contain
                     {
-                        padding: 10px 20px;
-                        background-image: linear-gradient(to right, $blue 0%, $pink  51%, $blue  100%);
-                        box-shadow: 0 0 20px $white;
-                        background-size: 250% auto;
-                        color: $white;
-                        border-radius: 10px;
-                        font-weight: 600;
-                        transition: 0.5s;
-                        cursor: pointer;
-
-                        &:hover
-                        {
-                            background-position: right center;
-                            color: $white;
-                        }
-                    }
-
-                    .bi-cart3
-                    {
-                        left: 205px;
-                        bottom: 30px;
-                        position: absolute;
-                        color: $blue;
-                        transition: 200ms ease-in-out;
-                        cursor: pointer;
-
-                        &:hover
-                        {
-                            color: $pink;
-                        }
-                    }
-
-                    &-quantity
-                    {
-                        background-color: $white;
-                        padding: 15px 0;
-                        position: absolute;
-                        left: 240px;
-                        top: 350px;
                         display: flex;
-                        flex-direction: column;
-                        align-content: center;
-                        justify-content: center;
                         align-items: center;
-                        box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
-                        border-radius: 5px;
-                        user-select: none;
+                        flex-direction: row;
+                        justify-content: center;
 
-
-                        &-title
+                        &-select
                         {
-                            margin-bottom: 10px;
+                            margin: 0 16px;
                         }
-
-                        &-apply
+                    }
+                }
+            }
+    
+            &__row
+            {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                align-content: center;
+                align-items: flex-start;
+    
+                &-card
+                {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    align-content: center;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin: 30px 30px;
+                    padding: 30px 10px;
+                    background-color: $white;
+                    border-radius: 5px;
+                    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+                    transition: 200ms ease-in-out;
+                    width: 250px;
+                    min-height: 350px;
+                    z-index: 0;
+    
+                    &-title
+                    {
+                        font-size: 1rem;
+                        text-align: center;
+                    }
+    
+                    &-img
+                    {
+                        padding: 5px 5px;
+                        max-width: 230px;
+                        max-height: 230px;
+                    }
+    
+                    &-price
+                    {
+                        font-size: 1.5rem;
+                        font-weight: 500;
+                    }
+    
+                    &-description
+                    {
+                        display: none;
+                        text-align: center;
+                        margin-top: 10px;
+                        color: rgba(0, 0, 0, 0.6);
+                        font-size: 1rem;
+                    }
+    
+                    &-buy
+                    {
+                        margin-top: 20px;
+                        display: none;
+                        
+    
+                        &-link
                         {
+                            padding: 10px 20px;
+                            background-image: linear-gradient(to right, $blue 0%, $pink  51%, $blue  100%);
+                            box-shadow: 0 0 20px $white;
+                            background-size: 250% auto;
+                            color: $white;
                             border-radius: 10px;
-                            margin-top: 10px;
+                            font-weight: 600;
+                            transition: 0.5s;
                             cursor: pointer;
-                            padding: 7px 15px;
-                            color: $blue;
-                            background-color: $white;
-                            transition: 200ms ease-in-out;
-                            font-size: 1rem;
-                            border: 1px solid $blue;
-
+    
                             &:hover
                             {
-                                border: 1px solid $another-pink;
-                                color: $another-pink;
+                                background-position: right center;
+                                color: $white;
+                            }
+                        }
+    
+                        .bi-cart3
+                        {
+                            color: $blue;
+                            transition: 200ms ease-in-out;
+                            cursor: pointer;
+    
+                            &:hover
+                            {
+                                color: $pink;
                             }
                         }
 
-                        &-selector
+                        .bi-heart
                         {
+                            color: $blue;
+                            transition: 200ms ease-in-out;
+                            cursor: pointer;
+    
+                            &:hover
+                            {
+                                color: $pink;
+                            }
+                        }
+    
+                        &-quantity
+                        {
+                            background-color: $white;
+                            padding: 15px 0;
+                            position: absolute;
+                            left: 240px;
+                            top: 350px;
                             display: flex;
-                            flex-direction: row;
+                            flex-direction: column;
                             align-content: center;
                             justify-content: center;
                             align-items: center;
-
-                            svg
-                            {   
-                                color: $blue;
-                                margin-left: 15px;
-                                margin-right: 15px;
-                                border-radius: 50%;
+                            box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+                            border-radius: 5px;
+                            user-select: none;
+    
+    
+                            &-title
+                            {
+                                margin-bottom: 10px;
+                            }
+    
+                            &-apply
+                            {
+                                border-radius: 10px;
+                                margin-top: 10px;
                                 cursor: pointer;
+                                padding: 7px 15px;
+                                color: $blue;
+                                background-color: $white;
                                 transition: 200ms ease-in-out;
-
+                                font-size: 1rem;
+                                border: 1px solid $blue;
+    
                                 &:hover
                                 {
-                                    color: $pink;
+                                    border: 1px solid $another-pink;
+                                    color: $another-pink;
                                 }
                             }
-
-                            input
+    
+                            &-selector
                             {
-                                width: 50px;
-                                text-align: center;
-                                outline: none;
-                                -webkit-appearance: none;
-                                background-color: $white;
+                                display: flex;
+                                flex-direction: row;
+                                align-content: center;
+                                justify-content: center;
+                                align-items: center;
+    
+                                svg
+                                {   
+                                    color: $blue;
+                                    margin-left: 15px;
+                                    margin-right: 15px;
+                                    border-radius: 50%;
+                                    cursor: pointer;
+                                    transition: 200ms ease-in-out;
+    
+                                    &:hover
+                                    {
+                                        color: $pink;
+                                    }
+                                }
+    
+                                input
+                                {
+                                    width: 50px;
+                                    text-align: center;
+                                    outline: none;
+                                    -webkit-appearance: none;
+                                    background-color: $white;
+                                }
+                                input::-webkit-outer-spin-button,
+                                input::-webkit-inner-spin-button 
+                                {
+                                appearance: none;
+                                margin: 0;
+                                }
                             }
-                            input::-webkit-outer-spin-button,
-                            input::-webkit-inner-spin-button 
+    
+                            &-error
                             {
-                            appearance: none;
-                            margin: 0;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                align-content: center;
+                                flex-direction: row;
+                                padding-top: 15px;
+                                display: none;
+    
+                                &-icon
+                                {
+                                    color: $red;
+                                }
+    
+                                &-text
+                                {
+                                    color: $red;
+                                    font-size: 0.9rem;
+                                }
                             }
                         }
-
-                        &-error
+                    }
+    
+                    &:hover
+                    {
+                        transform: scale(1.02);
+                        box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+    
+                        .productos__row-card-description
+                        {
+                            display: block;
+                            max-width: 250px;
+                        }
+                        
+                        .productos__row-card-buy
                         {
                             display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            align-content: center;
                             flex-direction: row;
-                            padding-top: 15px;
-                            display: none;
-
-                            &-icon
-                            {
-                                color: $red;
-                            }
-
-                            &-text
-                            {
-                                color: $red;
-                                font-size: 0.9rem;
-                            }
+                            align-items: center;
+                            justify-content: space-evenly;
+                            align-content: center;
+                            width: 100%;
                         }
                     }
                 }
-
-                &:hover
+            }
+        }
+    
+        .producto__añadido
+        {
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            justify-content: flex-end;
+            align-items: center;
+            display: none;
+    
+            &-card
+            {
+                position: fixed;
+                background-image: linear-gradient(to right, $blue 0%, $pink  51%, $blue  100%);
+                background-size: 200% auto;
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                justify-content: center;
+                align-items: center;
+                width: auto;
+                height: 70px;
+                z-index: 100;
+                top: 800px;
+                right: 65px;
+                padding: 10px 20px;
+                border-radius: 50px;
+                box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+    
+                svg
                 {
-                    transform: scale(1.02);
-                    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
-
-                    .productos__row-card-description
-                    {
-                        display: block;
-                        max-width: 250px;
-                    }
-                    
-                    .productos__row-card-buy
-                    {
-                        display: block;
-                    }
+                    margin-right: 10px;
+                    color: $white;
+                }
+    
+                &-text
+                {
+                    color: $white;
                 }
             }
         }
-    }
-
-    .producto__añadido
-    {
-        display: flex;
-        flex-direction: row;
-        align-content: center;
-        justify-content: flex-end;
-        align-items: center;
-        display: none;
-
-        &-card
+       
+    
+        .popup__descripcion
         {
+            background-color: $white;
             position: fixed;
-            background-image: linear-gradient(to right, $blue 0%, $pink  51%, $blue  100%);
-            background-size: 200% auto;
-            display: flex;
-            flex-direction: row;
-            align-content: center;
-            justify-content: center;
-            align-items: center;
-            width: auto;
-            height: 70px;
-            z-index: 100;
-            top: 800px;
-            right: 65px;
-            padding: 10px 20px;
-            border-radius: 50px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
-
-            svg
+    
+            &-head
             {
-                margin-right: 10px;
-                color: $white;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                align-content: center;
+                flex-direction: row;
+    
+                &-title
+                {
+                    font-size: 1.3rem;
+                }
             }
-
-            &-text
+    
+            &-card
             {
-                color: $white;
-            }
-        }
-    }
-   
-
-    .popup__descripcion
-    {
-        background-color: $white;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
-
-        &-head
-        {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            align-content: center;
-            flex-direction: row;
-
-            &-title
-            {
-                font-size: 1.3rem;
-            }
-        }
-
-        &-card
-        {
-            display: flex;
-            flex-direction: row;
-            align-content: center;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 30px;
-
-            &-title
-            {
-                margin-right: 50px;
-            }
-            &-img
-            {
-                margin-right: 50px;
-                width: auto;
-                max-height: 160px;
-            }
-            &-price
-            {
-                margin-right: 50px;
-            }
-            &-cantidad
-            {
-                width: 40px;
-                border: 2px solid $blue;
-                border-radius: 5px;
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                justify-content: center;
+                align-items: center;
+                padding: 20px 30px;
+    
+                &-title
+                {
+                    margin-right: 50px;
+                }
+                &-img
+                {
+                    margin-right: 50px;
+                    width: auto;
+                    max-height: 160px;
+                }
+                &-price
+                {
+                    margin-right: 50px;
+                }
+                &-cantidad
+                {
+                    width: 40px;
+                    border: 2px solid $blue;
+                    border-radius: 5px;
+                }
             }
         }
-    }
-
-    .lds-dual-ring {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-top: -50px;
-        margin-left: -50px;
-        z-index: 1;
-      }
-      .lds-dual-ring:after {
-        content: " ";
-        display: block;
-        width: 128px;
-        height: 128px;
-        border-radius: 50%;
-        border: 6px solid $white;
-        border-color: $pink transparent $blue transparent;
-        animation: lds-dual-ring 1.2s linear infinite;
-      }
-      @keyframes lds-dual-ring {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      
-
-
+    
+        .lds-dual-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+            z-index: 1;
+          }
+          .lds-dual-ring:after {
+            content: " ";
+            display: block;
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            border: 6px solid $white;
+            border-color: $pink transparent $blue transparent;
+            animation: lds-dual-ring 1.2s linear infinite;
+          }
+          @keyframes lds-dual-ring {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+              
 
 
