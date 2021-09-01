@@ -264,7 +264,7 @@ $(document).ready(function () {
 
           <span class="checkout__contain-details-total-currency">Moneda
           
-              <div class="button r" id="button-3">
+              <div class="button r" id="dolarButton">
 
                   <input type="checkbox" class="checkbox">
 
@@ -548,7 +548,7 @@ $(document).ready(function () {
       monedaSeleccionada = dolar.find(p => p.casa.nombre === moneda)
       let dolarHoy = monedaSeleccionada.casa.venta
 
-      $("#button-3").click(function () {
+      $("#dolarButton").click(function () {
 
         if ($('.checkbox').prop('checked')) {
 
@@ -565,9 +565,6 @@ $(document).ready(function () {
           checkoutTotal = $(`<h3 class="checkout__contain-details-total-title">Total: $${parseInt(total)}</h3>`)
           $(checkoutTotal).insertAfter(".checkout__contain-details-total-currency")
         }
-
       })
-
     })
-  }
-})
+}})

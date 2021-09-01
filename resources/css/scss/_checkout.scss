@@ -478,8 +478,9 @@
 
                 &-img
                 {
-                    min-width: 100px;
+                    width: 100px;
                     height: 100px;
+                    min-width: 100px;
                     margin-right: 30px;
                     border-radius: 50%;
                     object-fit: cover;
@@ -583,7 +584,7 @@
                     z-index: 1;
                 }
 
-                #button-3 .knobs:before
+                #dolarButton .knobs:before
                 {
                     content: 'AR$';
                     position: absolute;
@@ -602,25 +603,25 @@
                     transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
                 }
 
-                #button-3 .checkbox:active + .knobs:before
+                #dolarButton .checkbox:active + .knobs:before
                 {
                     width: 46px;
                     border-radius: 100px;
                 }
 
-                #button-3 .checkbox:checked:active + .knobs:before
+                #dolarButton .checkbox:checked:active + .knobs:before
                 {
                     margin-left: -26px;
                 }
 
-                #button-3 .checkbox:checked + .knobs:before
+                #dolarButton .checkbox:checked + .knobs:before
                 {
                     content: 'U$D';
                     left: 42px;
                     background-color: $pink;
                 }
 
-                #button-3 .checkbox:checked ~ .layer
+                #dolarButton .checkbox:checked ~ .layer
                 {
                     background-color: #fcebeb;
                 }

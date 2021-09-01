@@ -1,5 +1,6 @@
 .header
 {
+    
     height: 80px;
     background: linear-gradient(90deg, rgba(21,162,203,1) 15%, rgba(224,42,255,1) 100%);
     position: fixed;
@@ -99,15 +100,98 @@
             &-link
             {
                 padding: 15px 15px;
+                
+                &-favoritos
+                {
+                    position: absolute;
+                    overflow-y:scroll;
+                    width: 380px;
+                    top: 70px;
+                    height: 430px;
+                    background-color: $white;
+                    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+                    border-bottom-left-radius: 10px;
+                    border-top-left-radius: 10px;
+                    display: none;
+
+                    ::-webkit-scrollbar
+                    {
+                        width: 2px;
+                        height: 2px;
+                        }
+                        ::-webkit-scrollbar-thumb{
+                        background: linear-gradient(100deg, #FC42FF 0%,#4AABFF 100%);
+                        border-radius: 0px;
+                        }
+                        ::-webkit-scrollbar-thumb:hover{
+                        background: #B3AFB3;
+                        }
+                        ::-webkit-scrollbar-track{
+                        background: #F0F0F0;
+                        border-radius: 0px;
+                        box-shadow: inset 0px 0px 0px 0px #F0F0F0;
+                    }
+
+                    &-contains
+                    {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 15px 10px;
+                        border-bottom: 1px solid $gray;
+
+                        &-img
+                        {
+                            width: 80px;
+                            height: 80px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            margin-right: 20px;
+                        }
+
+                        &-text
+                        {
+                            max-width: 116px;
+                            margin-right: 30px;
+
+                            &-title
+                            {
+                                margin-bottom: 10px;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
+    
+                            &-price
+                            {
+    
+                            }
+                        }
+
+                        &-delete
+                        {
+                            cursor: pointer;
+                        }
+                    }
+                }
 
                 &-title
                 {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    align-content: center;
+                    flex-direction: row;
                     color: $white;
                     transition: 200ms ease-in-out;
                     border-bottom: 2px solid transparent;
                     padding-bottom: 5px;
                     position: relative;
                     cursor: pointer;
+
+                    svg
+                    {
+                        margin-left: 5px;
+                    }
 
                     &-counter
                     {
@@ -118,8 +202,18 @@
                     }
                 }
             }
+
+            #favs
+            {
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: flex-start;
+                align-items: flex-end;
+            }
         }
     }
+    
 }
 
     
