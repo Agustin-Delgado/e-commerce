@@ -132,6 +132,29 @@
                         box-shadow: inset 0px 0px 0px 0px #F0F0F0;
                     }
 
+                    &-empty
+                    {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: 100%;
+                        height: 100%;
+                        align-content: center;
+                        justify-content: center;
+                        
+                        &-title
+                        {
+                            text-align: center;
+                            font-size: 1.5rem;
+                            margin-bottom: 30px;
+                        }
+
+                        &-text
+                        {
+                            text-align: center;
+                        }
+                    }
+
                     &-contains
                     {
                         display: flex;
@@ -139,6 +162,7 @@
                         justify-content: space-between;
                         padding: 15px 10px;
                         border-bottom: 1px solid $gray;
+                        margin: 5px 10px;
 
                         &-img
                         {
@@ -152,7 +176,6 @@
                         &-text
                         {
                             max-width: 116px;
-                            margin-right: 30px;
 
                             &-title
                             {
@@ -160,16 +183,26 @@
                                 overflow: hidden;
                                 text-overflow: ellipsis;
                             }
-    
-                            &-price
-                            {
-    
-                            }
                         }
 
-                        &-delete
+                        &-options
                         {
-                            cursor: pointer;
+                            text-align:end;
+                            width: min-content;
+
+                            &-delete
+                            {
+                                cursor: pointer;
+                                color: $blue;
+                                font-size: 0.8rem;
+                            }
+    
+                            &-buy
+                            {
+                                cursor: pointer;
+                                color: $blue;
+                                font-size: 0.8rem;
+                            }
                         }
                     }
                 }

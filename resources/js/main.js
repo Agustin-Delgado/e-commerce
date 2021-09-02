@@ -522,36 +522,104 @@ $(document).ready(function() {
 
     $("#favs").on('mouseenter', function(){
 
-        $(".header__nav-list-link-favoritos").delay(300).fadeIn(50)
+        $(".header__nav-list-link-favoritos").fadeIn(50)
 
         let storage = JSON.parse(localStorage.getItem("favoritos"))
 
-        $.each(storage, function(i) {
+        if(storage.length === 0){
 
-            let favoritosEstructura = $(`
+            let favoritosVacio = $(`
 
-            <div class="header__nav-list-link-favoritos-contains">
+                <div class="header__nav-list-link-favoritos-empty">
 
-                <img class="header__nav-list-link-favoritos-contains-img" src="${storage[i].img}" alt="">
+                    <h2 class="header__nav-list-link-favoritos-empty-title">Aún no hay productos en guardados
+                        en favoritos</h2>
+                    <p class="header__nav-list-link-favoritos-empty-text">Sigue explorando para encontrar tu
+                        proxima compra!</p>
 
-                    <div class="header__nav-list-link-favoritos-contains-text">
-
-                        <h3 class="header__nav-list-link-favoritos-contains-text-title">${storage[i].nombre}</h3>
-                        <span class="header__nav-list-link-favoritos-contains-text-price">$${storage[i].precio}</span>
-
-                    </div>
-
-                <a class="header__nav-list-link-favoritos-contains-delete">Delete</a>
-
-            </div>
+                </div>
 
             `)
 
-            $('.header__nav-list-link-favoritos').append(favoritosEstructura)
+            $('.header__nav-list-link-favoritos').append(favoritosVacio)
 
+        }
+        else
+        {
+            $.each(storage, function(i) {
+
+                let favoritosEstructura = $(`
+
+                <div class="header__nav-list-link-favoritos-contains">
+
+                    <img class="header__nav-list-link-favoritos-contains-img" src="${storage[i].img}" alt="">
+
+                        <div class="header__nav-list-link-favoritos-contains-text">
+
+                            <h3 class="header__nav-list-link-favoritos-contains-text-title">${storage[i].nombre}</h3>
+                            <span class="header__nav-list-link-favoritos-contains-text-price">$${storage[i].precio}</span>
+
+                        </div>
+
+                    <div class="header__nav-list-link-favoritos-contains-options">
+
+                        <a id="${storage[i].identificador}-delfav" class="header__nav-list-link-favoritos-contains-options-delete">Eliminar</a>
+                        <a id="${storage[i].identificador}-buyfav" class="header__nav-list-link-favoritos-contains-options-buy">Comprar</a>
+
+                    </div>
+
+                </div>
+
+                `)
+
+                $('.header__nav-list-link-favoritos').append(favoritosEstructura)
+            })
+        }
+
+        $(".header__nav-list-link-favoritos-contains-options-delete").on('click', function(event){
+
+            let favId = event.target.id
+            favId = favId.replace("-delfav", "")
+            itemSeleccionado = storage.find(p => p.identificador === favId)
+            console.log(itemSeleccionado)
+            itemSeleccionado.favoritos = false
+            const index = favoritos.findIndex(p => p.identificador === favId);
+            favoritos.splice(index, 1);
+            localStorage.setItem('favoritos', JSON.stringify(favoritos))
+            location.reload()
+        })
+
+        $(".header__nav-list-link-favoritos-contains-options-buy").on('click', function(event){
+
+            let favId = event.target.id
+            favId = favId.replace("-buyfav", "")
+            itemSeleccionado = storage.find(p => p.identificador === favId)
+
+            $(".productos").empty()
+            $(".productos").append(checkout)
+            $(".checkout__contain-details-content").remove()
+            $(".checkout__contain-details-total-title").remove()
+            $('.checkbox').prop('checked', false)
+    
+            let checkoutItems = $(`
+              
+              <div class="checkout__contain-details-content">
+                  <img class="checkout__contain-details-content-img" src="${itemSeleccionado.img}"
+                  alt="">
+                  <h3 class="checkout__contain-details-content-title">${itemSeleccionado.nombre}</h3>
+                  <span class="checkout__contain-details-content-subtotal">Subtotal: $${itemSeleccionado.precio}</span>
+              </div >
+              `)
+
+            $(checkoutItems).insertAfter(".checkout__contain-details-title")
+    
+            total = itemSeleccionado.precio
+    
+            checkoutInit()
         })
 
     })
+    
 
     $("#favs").on('mouseleave', function(){
 
