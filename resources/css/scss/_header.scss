@@ -203,6 +203,18 @@
                                 color: $blue;
                                 font-size: 0.8rem;
                             }
+
+                            &-addcart
+                            {
+                                color: $blue;
+                                transition: 200ms ease-in-out;
+                                cursor: pointer;
+        
+                                &:hover
+                                {
+                                    color: $pink;
+                                }
+                            }
                         }
                     }
                 }
