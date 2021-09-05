@@ -299,6 +299,7 @@ $(document).ready(function () {
         $(".productos").append(checkout)
         $(".checkout__contain-details-content").remove()
         $(".checkout__contain-details-total-title").remove()
+        $('.checkbox').prop('checked', false)
 
         let checkoutItems = $(`
           
