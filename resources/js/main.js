@@ -791,6 +791,7 @@ $(document).ready(function () {
 
                 let cartId = event.target.id
                 cartId = cartId.replace("-apply", "")
+                itemSeleccionado = storage.find(p => p.identificador === cartId)
                 const i = carrito.findIndex(p => p.identificador === cartId)
                 carrito[i].cantidad = itemSeleccionado.cantidad
                 localStorage.setItem('carrito', JSON.stringify(carrito))
